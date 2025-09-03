@@ -1,0 +1,222 @@
+/* --- 1. Variables and Basic Setup --- */
+:root {
+    /* Colors */
+    --fuchsia-800: #86198F;
+    --pink-700: #BE185D;
+  
+    /* Light Theme */
+    --background: #FFFFFF;
+    --foreground: #020817;
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+    --card: #FFFFFF;
+    --card-foreground: #020817;
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --primary: #0A0A0A;
+    --secondary: #F1F5F9;
+    --secondary-foreground: #0F172A;
+    /* Category Badge Colors for Light Mode */
+    --category-badge-bg-light: #000000;
+    --category-badge-fg-light: #FFFFFF;
+}
+.dark {
+    /* Dark Theme */
+    --background: #020817;
+    --foreground: #FAFAFA;
+    --muted: #1E293B;
+    --muted-foreground: #94A3B8;
+    --card: #020817;
+    --card-foreground: #FAFAFA;
+    --border: #1E293B;
+    --input: #1E293B;
+    --primary: #FAFAFA;
+    --secondary: #1E293B;
+    --secondary-foreground: #FAFAFA;
+    /* Category Badge Colors for Dark Mode */
+    --category-badge-bg-dark: var(--secondary);
+    --category-badge-fg-dark: var(--secondary-foreground);
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.3s, color 0.3s;
+}
+#app-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+/* --- 2. Header and Dark Mode Toggle --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.header-text h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+.header-text p {
+    color: var(--muted-foreground);
+    margin-top: 0.25rem;
+}
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.dark-mode-toggle input[type="checkbox"] {
+    display: none;
+}
+.dark-mode-toggle label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+}
+#moon-icon { display: none; }
+.dark #sun-icon { display: none; }
+.dark #moon-icon { display: block; }
+/* --- 3. Filters Card --- */
+.filters-card {
+    background-color: var(--card);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.filters-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: end;
+}
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.search-group {
+    grid-column: span 1;
+}
+label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+input[type="text"],
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--input);
+    border-radius: 0.5rem;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: 0.875rem;
+}
+/* --- 4. Table --- */
+.table-container {
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    overflow: auto;
+    margin-bottom: 1rem;
+}
+table {
+    width: 100%;
+    text-align: center;
+    font-size: 0.875rem;
+    border-collapse: collapse;
+}
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+th {
+    background-color: var(--fuchsia-800);
+    color: white;
+    padding: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-size: 18px;
+}
+tbody tr:last-child {
+    border-bottom: none;
+}
+tbody tr:nth-child(odd) {
+    background-color: color-mix(in srgb, var(--muted) 30%, transparent);
+}
+td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+.font-medium {
+    font-weight: 600;
+    font-size: 16px;
+}
+td:nth-child(2) { /* Description column */
+    line-height: 1.6;
+}
+/* --- 5. Badges and In-Cell Elements --- */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+}
+html:not(.dark) .category-badge {
+    background-color: var(--category-badge-bg-light);
+    color: var(--category-badge-fg-light);
+}
+.dark .category-badge {
+    background-color: var(--category-badge-bg-dark);
+    color: var(--category-badge-fg-dark);
+}
+.compensation-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+.picture-needed {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--pink-700);
+    font-weight: 500;
+    justify-content: center;
+}
+/* --- 6. Footer --- */
+.footer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+}
+/* --- 7. Media Queries for Responsive Design --- */
+@media (min-width: 1024px) {
+    .filters-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .search-group {
+        grid-column: span 2;
+    }
+}
